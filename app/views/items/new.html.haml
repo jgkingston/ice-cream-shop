@@ -1,0 +1,4 @@
+= render partial: "#{@product.name.downcase}", product_id: @product.id
+
+%br
+= link_to "Cancel", order_path(@order)

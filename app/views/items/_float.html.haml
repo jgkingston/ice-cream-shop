@@ -1,0 +1,45 @@
+Float
+
+= nested_form_for [@order, @item] do |f|
+  = f.hidden_field :product_id, value: params[:product_id]
+  = f.hidden_field :order_id, value: @order.id
+
+  = f.fields_for :selections do |soda|
+    = soda.hidden_field :item_id, value: @item.id
+    = soda.select :ingredient_id,
+      options_for_select( sodas.collect {|ingredient| [ingredient.description, ingredient.id]} )
+ 
+  = f.fields_for :selections do |ice_cream|
+    = ice_cream.hidden_field :item_id, value: @item.id
+    = ice_cream.select :ingredient_id,
+      options_for_select( ice_cream_flavors.collect {|ingredient| [ingredient.description, ingredient.id]} )
+    = ice_cream.link_to_remove "Remove scoop"
+  = f.link_to_add "Add Scoop", :selections
+  %br
+  = f.submit "Add Float to Order"
+
+
+:javascript
+  $(function() {
+    var fieldsCount,
+        minFieldsCount = 1,
+        $removeLink = $('a.remove_nested_fields');
+
+    function toggleRemoveLink() {
+      $removeLink.toggle(fieldsCount <= minFieldsCount)
+    }
+
+    $(document).on('nested:fieldAdded', function() {
+      fieldsCount += 1;
+      toggleRemoveLink();
+    });
+
+    $(document).on('nested:fieldRemoved', function() {
+      fieldsCount -= 1;
+      toggleRemoveLink();
+    });  
+
+    // count existing nested fields after page was loaded
+    fieldsCount = $('form .fields').length;
+    toggleRemoveLink();
+  })

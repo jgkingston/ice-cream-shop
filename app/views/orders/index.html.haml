@@ -1,0 +1,17 @@
+%h2 Orders
+
+%ul
+  - @orders.each do |order|
+    %li
+      = "Order #{order.id}"
+      = "Total:"
+      = order.total
+      
+      - if order.complete == true
+        = link_to "View", order_path(order)
+      - else 
+        = link_to "Edit", order_path(order)
+        |
+        = link_to "Cancel", order_path(order), method: :delete
+
+= render 'form'

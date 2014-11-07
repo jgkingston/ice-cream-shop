@@ -1,0 +1,49 @@
+%h2 Ice Cream Cone
+
+= nested_form_for [@order, @item] do |f|
+  = f.hidden_field :product_id, value: params[:product_id]
+  = f.hidden_field :order_id, value: @order.id
+
+  %h3 Flavor(s)
+
+  = f.fields_for :selections do |selection_form|
+    = selection_form.hidden_field :item_id, value: @item.id
+    = selection_form.select :ingredient_id,
+      options_for_select( ice_cream_flavors.collect {|ingredient| [ingredient.description, ingredient.id]} )
+    = selection_form.link_to_remove "Remove scoop"
+  = f.link_to_add "Add Scoop", :selections
+  %br
+  %br
+  = f.submit "Add Cone to Order"
+
+
+:javascript
+  $(function() {
+    var fieldsCount,
+        maxFieldsCount = 1,
+        minFieldsCount = 0,
+        $addLink = $('a.add_nested_fields');
+        $removeLink = $('a.remove_nested_fields');
+
+    function toggleAddLink() {
+      $addLink.toggle(fieldsCount <= maxFieldsCount);
+      $removeLink.toggle(fieldsCount <= minFieldsCount)
+    }
+
+    $(document).on('nested:fieldAdded', function() {
+      fieldsCount += 1;
+      toggleAddLink();
+      toggleRemoveLink();
+    });
+
+    $(document).on('nested:fieldRemoved', function() {
+      fieldsCount -= 1;
+      toggleAddLink();
+      toggleRemoveLink();
+    });  
+
+    // count existing nested fields after page was loaded
+    fieldsCount = $('form .fields').length;
+    toggleAddLink();
+    toggleRemoveLink();
+  })

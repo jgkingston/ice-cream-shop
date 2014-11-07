@@ -1,0 +1,38 @@
+%h2 Order Items
+
+%ul
+  - @order.items.includes(:product, :ingredients).each do |item|
+    %li
+      
+      = item.product.name.humanize
+
+      - if @order.complete == false
+        |
+        = link_to "Remove", order_item_path(@order, item), method: :delete
+      
+      %ul
+        - item.ingredients.each do |ingredient|
+          %li
+            = "#{ingredient.description.humanize} #{ingredient.category.humanize}"
+      
+%h3
+  Order Total:
+
+  = @order.total
+
+- if @order.complete == false
+  - @products.each do |product|
+    = link_to "Add #{product.name}", new_order_item_path(@order, product_id: product.id)
+
+  %br
+  %br
+
+  - if @order.items.length > 0
+
+    = link_to "Complete Order", checkout_order_path(@order)
+
+    %br
+
+    %br
+
+= link_to 'Back', orders_path

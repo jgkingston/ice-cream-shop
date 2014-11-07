@@ -1,0 +1,18 @@
+Shake
+
+= nested_form_for [@order, @item] do |f|
+  = f.hidden_field :product_id, value: params[:product_id]
+  = f.hidden_field :order_id, value: @order.id
+
+  = f.fields_for :selections do |milk|
+    = milk.hidden_field :item_id, value: @item.id
+    = milk.select :ingredient_id,
+      options_for_select( milk_choices.collect {|ingredient| [ingredient.description, ingredient.id]} )
+ 
+  = f.fields_for :selections do |ice_cream|
+    = ice_cream.hidden_field :item_id, value: @item.id
+    = ice_cream.select :ingredient_id,
+      options_for_select( ice_cream_flavors.collect {|ingredient| [ingredient.description, ingredient.id]} )
+
+  %br
+  = f.submit "Add Shake to Order"
