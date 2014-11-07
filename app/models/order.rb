@@ -10,11 +10,7 @@ class Order < ActiveRecord::Base
       prices = items.map { |item| item.product.price - item.discount}
       total = prices.reduce(:+)
     end
-    total = to_money total
-  end
-
-  def to_money number
-    "$ #{sprintf( "%0.02f", number)}"
+    total
   end
 
 

@@ -1,5 +1,9 @@
 module OrdersHelper
 
+  def to_money number
+    "$ #{sprintf( "%0.02f", number)}"
+  end
+
   def remove_item_action order, item
     if order.complete == false
       link_to "Remove", order_item_path(order, item), method: :delete

@@ -4,7 +4,8 @@
   - @order.items.includes(:product, :ingredients).each do |item|
     %li
       
-      = item.product.name.humanize
+      = item.display
+      = to_money(item.display_price)
 
       = remove_item_action @order,item
       
@@ -18,7 +19,7 @@
 %h3
   Order Total:
 
-  = @order.total
+  = to_money(@order.total)
 
 
 - if @order.complete == false

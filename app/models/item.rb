@@ -9,4 +9,12 @@ class Item < ActiveRecord::Base
 
   accepts_nested_attributes_for :selections, :allow_destroy => true
 
+  def display
+    self.product.name.humanize
+  end
+
+  def display_price
+    self.product.price - self.discount
+  end
+
 end
