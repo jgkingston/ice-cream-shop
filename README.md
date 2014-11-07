@@ -2,10 +2,10 @@
 
 A demonstration application using Rails 4, MySQL and nested forms. To run this application locally clone this repository and run the following commands.
   
-  bundle install
-  rake db:migrate
-  rake db:seed
-  rails s
+    $ bundle install
+    $ rake db:migrate
+    $ rake db:seed
+    $ rails s
 
 ##Problem Statement
 
@@ -17,8 +17,9 @@ Ice cream cones can be made of either one or two scoops, and each scoop can be a
 Finally, your store offers discounts, but only on milkshakes and floats and not on ice cream cones. Utilizing Object Oriented Programming, design and build a system that will store the listed information. Your submitted solution should contain not only the source code for the classes you have created, but also contain example usage of these classes.
 
 You must:
-- create at least one of each of your product types (ice cream cone, milkshake, float)
-- purchase at least one item with a discount
-- use at least 5 different flavors of ice cream
-- use at least two different serving vessels(waffle cone, cup, etc).
-- use at least 3 different flavors of soda
+
+* create at least one of each of your product types (ice cream cone, milkshake, float)
+* purchase at least one item with a discount
+* use at least 5 different flavors of ice cream
+* use at least two different serving vessels(waffle cone, cup, etc).
+* use at least 3 different flavors of soda
