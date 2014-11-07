@@ -17,4 +17,5 @@ class Order < ActiveRecord::Base
     "$ #{sprintf( "%0.02f", number)}"
   end
 
+
 end

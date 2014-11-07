@@ -6,22 +6,20 @@
       
       = item.product.name.humanize
 
-      - if @order.complete == false
-        |
-        = link_to "Remove", order_item_path(@order, item), method: :delete
-        - discount = item.product.try(:discount)
-        -if discount && item.discount == 0
-          |
-          = link_to "Apply Discount", discount_order_item_path(@order, item)
+      = remove_item_action @order,item
+      
+      = apply_discount_action @order, item
+      
       %ul
         - item.ingredients.each do |ingredient|
           %li
-            = "#{ingredient.description.humanize} #{ingredient.category.humanize}"
+            = ingredient.display
       
 %h3
   Order Total:
 
   = @order.total
+
 
 - if @order.complete == false
   - @products.each do |product|
