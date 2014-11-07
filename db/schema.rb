@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106234208) do
-
-  create_table "discounts", force: true do |t|
-    t.integer  "product_id"
-    t.float    "discount",   limit: 24
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141031122722) do
 
   create_table "ingredients", force: true do |t|
     t.string   "category"
@@ -30,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141106234208) do
   create_table "items", force: true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
+    t.float    "discount",   limit: 24, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141106234208) do
   create_table "products", force: true do |t|
     t.string   "name"
     t.float    "price",      limit: 24
+    t.float    "discount",   limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,14 +1,18 @@
-Float
+%h2 Float
 
 = nested_form_for [@order, @item] do |f|
   = f.hidden_field :product_id, value: params[:product_id]
   = f.hidden_field :order_id, value: @order.id
+
+  %h3 Soda Flavor
 
   = f.fields_for :selections do |soda|
     = soda.hidden_field :item_id, value: @item.id
     = soda.select :ingredient_id,
       options_for_select( sodas.collect {|ingredient| [ingredient.description, ingredient.id]} )
  
+  %h3 Ice Cream Flavor(s)
+
   = f.fields_for :selections do |ice_cream|
     = ice_cream.hidden_field :item_id, value: @item.id
     = ice_cream.select :ingredient_id,

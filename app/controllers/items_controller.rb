@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :load_order
-  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_item, only: [:show, :edit, :update, :destroy, :discount]
 
 
   def new
@@ -24,6 +24,12 @@ class ItemsController < ApplicationController
     redirect_to order_path(@order)
   end
 
+  def discount
+    discount = @item.product.discount * @item.product.price
+    @item.update_attributes(discount: discount)
+    redirect_to order_path(@order)
+  end
+
   private
 
   def load_order
@@ -35,7 +41,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:order_id, :product_id, :price, selections_attributes: [:id, :item_id, :ingredient_id, :price, :_destroy])
+    params.require(:item).permit(:order_id, :product_id, :discount, selections_attributes: [:id, :item_id, :ingredient_id, :price, :_destroy])
   end
 
 end

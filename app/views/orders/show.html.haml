@@ -9,7 +9,10 @@
       - if @order.complete == false
         |
         = link_to "Remove", order_item_path(@order, item), method: :delete
-      
+        - discount = item.product.try(:discount)
+        -if discount && item.discount == 0
+          |
+          = link_to "Apply Discount", discount_order_item_path(@order, item)
       %ul
         - item.ingredients.each do |ingredient|
           %li
@@ -28,6 +31,7 @@
   %br
 
   - if @order.items.length > 0
+
 
     = link_to "Complete Order", checkout_order_path(@order)
 

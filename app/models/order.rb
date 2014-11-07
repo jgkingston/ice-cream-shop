@@ -5,8 +5,9 @@ class Order < ActiveRecord::Base
   
   def total
     total = 0.0
-    if self.items.length > 0 
-      prices = self.items.includes(:product).map { |item| item.product.price }
+    items = self.items.includes(:product)
+    if items.length > 0 
+      prices = items.map { |item| item.product.price - item.discount}
       total = prices.reduce(:+)
     end
     total = to_money total

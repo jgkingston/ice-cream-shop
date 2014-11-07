@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     member do
       get :checkout
     end
-    resources :items
+    resources :items do
+      member do 
+        get :discount
+      end
+    end
   end
 
   resources :products
