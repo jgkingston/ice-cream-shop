@@ -1,3 +1,14 @@
+# Readme
+
+A demonstration application using Rails 4, MySQL and nested forms. To run this application locally clone this repository and run the following commands.
+  
+  bundle install
+  rake db:migrate
+  rake db:seed
+  rails s
+
+##Problem Statement
+
 Imagine that you run an ice cream shop. You sell three different main items – ice cream cones, milkshakes, and floats. You have a large number of different flavors of ice cream available.
 
 
@@ -11,19 +22,3 @@ You must:
 - use at least 5 different flavors of ice cream
 - use at least two different serving vessels(waffle cone, cup, etc).
 - use at least 3 different flavors of soda
-
-Questions some have asked:
-
-I assume that PHP is the preferred language for this OOP exercise? 
-Yes, PHP is preferred but any language can be used.
-
-Should the storage of information be performed in a MySQL or other database, or do
-you mean that the information should just be stored in the objects I create for this project? 
-The objects can store the information, although you could use a mysql database.
-
-Should the solution be complete with an HTML web form for ordering? 
-It is not required, but can be used if you prefer.
-
-When submitting examples of usage, do you also mean
-screenshots or simply applications I write which utilize the objects I create? 
-We would like to see the application, not screenshots.
